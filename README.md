@@ -13,7 +13,7 @@ Bluetooth library must be installed and turned on:
 And must be paired with watched mac address object:
 
 1. find object: `hcitool scan`
-2. pair object: `rfcomm connect 0 objectMacAddress 10`
+2. pair object: `rfcomm connect 0 <objectMacAddress> 10`
 
 ## Methods
 

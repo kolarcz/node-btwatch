@@ -1,9 +1,9 @@
 var EventEmitter = require('events').EventEmitter;
+var Spawn = require('child_process').spawn;
 
 
 function BTWatch () {
   EventEmitter.call(this);
-  this.spawn = require('child_process').spawn;
   this.macAddresses = {};
 }
 
@@ -39,7 +39,7 @@ BTWatch.prototype = {
   inRangeCheck_: function (macAddress, callback, prevCntFails) {
     prevCntFails = prevCntFails || 0;
     
-    var ls = this.spawn('l2ping', ['-c', '1', '-t', '5', macAddress]);
+    var ls = Spawn('l2ping', ['-c', '1', '-t', '5', macAddress]);
     var result = '';
     
     ls.stdout.on('data', function (data) {

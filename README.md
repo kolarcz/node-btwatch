@@ -33,8 +33,10 @@ Called if any of watched mac address changes its reach.
 Called if watched mac address *specifiedMacAddress* changes its reach.
 
 ## Example
-```js
-var BTWatch = require('node-btwatch');
+```javascript
+var nodeBTWatch = require('node-btwatch');
+
+var BTWatch = new nodeBTWatch();
 var objectMacAddr = '00:F7:6F:01:02:03';
 
 if (BTWatch.inRange(objectMacAddr)) {
@@ -50,5 +52,5 @@ BTWatch.on('change', function (inRange, macAddress) {
   } else {
     console.log('Mac address %s now leave from range', objectMacAddr);
   }
-})
+});
 ```

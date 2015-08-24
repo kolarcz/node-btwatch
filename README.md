@@ -33,7 +33,7 @@ Called if any of watched mac address changes its reach.
 Called if watched mac address *specifiedMacAddress* changes its reach.
 
 ## Example
-```
+```js
 var BTWatch = require('node-btwatch');
 var objectMacAddr = '00:F7:6F:01:02:03';
 

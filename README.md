@@ -1,5 +1,5 @@
 # node-btwatch
-Detect of bluetooth devices get in or out of reach by `l2ping` and `node.js`
+Detect of bluetooth devices get in or out of reach with `l2ping` and `node.js`
 
 ## Instalation
 `npm install node-btwatch`

@@ -1,7 +1,7 @@
 {
   "name": "node-btwatch",
-  "version": "1.0.4",
-  "description": "Detect of bluetooth devices get in or out of reach by l2ping and node.js",
+  "version": "1.0.5",
+  "description": "Detect of bluetooth devices get in or out of reach with l2ping and node.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

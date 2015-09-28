@@ -9,9 +9,9 @@ function BTWatch () {
 
 
 BTWatch.prototype = {
-  
+
   __proto__: EventEmitter.prototype,
-  
+
   watch: function (macAddress) {
     if (typeof this.macAddresses[macAddress] === 'undefined') {
       this.macAddresses[macAddress] = '?';
@@ -38,17 +38,17 @@ BTWatch.prototype = {
 
   inRangeCheck_: function (macAddress, callback, prevCntFails) {
     prevCntFails = prevCntFails || 0;
-    
+
     var ls = Spawn('l2ping', ['-c', '1', '-t', '5', macAddress]);
     var result = '';
-    
+
     ls.stdout.on('data', function (data) {
       result += data;
     });
-    
+
     ls.on('close', function () {
       var inRange = Boolean(String(result).match(' time '));
-      
+
       if (inRange) {
         callback(macAddress, true);
       } else if(++prevCntFails < 5) {
@@ -62,8 +62,8 @@ BTWatch.prototype = {
   inRange: function (macAddress) {
     return this.macAddresses[macAddress];
   }
-  
+
 };
 
 
-module.exports = BTWatch;
+module.exports = new BTWatch();

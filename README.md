@@ -8,7 +8,7 @@ Detect of bluetooth devices get in or out of reach with `l2ping` and `node.js`
 Bluetooth library must be installed and turned on:
 
 1. `apt-get install bluez`
-2. `hciconfig hci0 up`
+2. `hciconfig hci0 up` (it can be at cron too: `@reboot sudo hciconfig hci0 up`)
 
 And must be paired with watched mac address object:
 
@@ -34,9 +34,7 @@ Called if watched mac address *specifiedMacAddress* changes its reach.
 
 ## Example
 ```javascript
-var nodeBTWatch = require('node-btwatch');
-
-var BTWatch = new nodeBTWatch();
+var BTWatch = require('node-btwatch');
 var objectMacAddr = '00:F7:6F:01:02:03';
 
 if (BTWatch.inRange(objectMacAddr)) {

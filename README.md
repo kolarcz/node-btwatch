@@ -2,7 +2,7 @@
 Detect of bluetooth devices get in or out of reach with `l2ping` and `node.js`
 
 ## Instalation
-`npm install node-btwatch`
+`npm install btwatch`
 
 ## Dependencies
 Bluetooth library must be installed and turned on:
@@ -34,7 +34,7 @@ Called if watched mac address *specifiedMacAddress* changes its reach.
 
 ## Example
 ```javascript
-var BTWatch = require('node-btwatch');
+var BTWatch = require('btwatch');
 var objectMacAddr = '00:F7:6F:01:02:03';
 
 if (BTWatch.inRange(objectMacAddr)) {

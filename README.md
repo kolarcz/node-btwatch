@@ -17,6 +17,9 @@ And must be paired with watched mac address object:
 
 ## Methods
 
+### BTWatch.set(*maxPingAttempts*, *maxPingSeconds*)
+Sets the search parameters.
+
 ### BTWatch.watch(*macAddress*)
 Start watching specified mac address.
 
@@ -28,6 +31,9 @@ Check and return if specified mac address is in reach.
 
 ### BTWatch.on('change', *callback(inRange, macAddress)*)
 Called if any of watched mac address changes its reach.
+
+### BTWatch.on('change::all', *callback(arrayOfMacAddressesStates)*)
+Called if any of watched mac address changes its reach, but returns all watched mac address states.
 
 ### BTWatch.on('change::*specifiedMacAddress*', *callback(inRange, macAddress)*)
 Called if watched mac address *specifiedMacAddress* changes its reach.

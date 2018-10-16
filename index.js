@@ -12,6 +12,26 @@ BTWatch.prototype = {
 
   __proto__: EventEmitter.prototype,
 
+  maxPingAttempts: 5,
+  maxPingSeconds: 5,
+
+  set: function (maxPingAttempts, maxPingSeconds) {
+    if (maxPingAttempts !== undefined) {
+      if (maxPingAttempts !== parseInt(maxPingAttempts, 10) || maxPingAttempts <= 0) {
+        throw new Error('maxPingAttempts param needs to be integer and bigger than 0');
+      } else {
+        this.maxPingAttempts = maxPingAttempts;
+      }
+    }
+    if (maxPingSeconds !== undefined) {
+      if (maxPingSeconds !== parseInt(maxPingSeconds, 10) || maxPingSeconds <= 0) {
+        throw new Error('maxPingSeconds param needs to be integer and bigger than 0');
+      } else {
+        this.maxPingSeconds = maxPingSeconds;
+      }
+    }
+  },
+
   watch: function (macAddress) {
     if (typeof this.macAddresses[macAddress] === 'undefined') {
       this.macAddresses[macAddress] = '?';
@@ -28,6 +48,7 @@ BTWatch.prototype = {
       if (typeof this.macAddresses[macAddress] !== 'undefined') {
         if (this.macAddresses[macAddress] !== inRange) {
           this.macAddresses[macAddress] = inRange;
+          this.emit('change::all', this.macAddresses);
           this.emit('change::' + macAddress, inRange, macAddress);
           this.emit('change', inRange, macAddress);
         }
@@ -39,7 +60,7 @@ BTWatch.prototype = {
   inRangeCheck_: function (macAddress, callback, prevCntFails) {
     prevCntFails = prevCntFails || 0;
 
-    var ls = Spawn('l2ping', ['-c', '1', '-t', '5', macAddress]);
+    var ls = Spawn('l2ping', ['-c', '1', '-t', String(this.maxPingSeconds), macAddress]);
     var result = '';
 
     ls.stdout.on('data', function (data) {
@@ -51,7 +72,7 @@ BTWatch.prototype = {
 
       if (inRange) {
         callback(macAddress, true);
-      } else if(++prevCntFails < 5) {
+      } else if(++prevCntFails < this.maxPingAttempts) {
         this.inRangeCheck_(macAddress, callback, prevCntFails);
       } else {
         callback(macAddress, false);
